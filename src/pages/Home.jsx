@@ -7,7 +7,7 @@ const Home = () => {
 
  const navigate=useNavigate();
  const [roomId,setRoomId]=useState('');
- const [userName,setUserName]=useState('');
+ const [username,setUserName]=useState('');
 
   const createNewRoom=(e)=>{
       e.preventDefault();
@@ -17,7 +17,7 @@ const Home = () => {
   }
 
   const joinRoom=()=>{
-      if(!roomId || !userName){
+      if(!roomId || !username){
           toast.error('ROOM ID & username is required');
           return;
       }
@@ -25,7 +25,7 @@ const Home = () => {
       //redirect
       navigate(`/editor/${roomId}`,{
           state:{
-              userName
+              username
           }
       })
 
@@ -44,7 +44,7 @@ const Home = () => {
             <h4 className="mainLabel">Paste Invitation ROOM ID</h4>
             <div className="inputGroup">
                 <input type="text" className="inputBox" placeholder='ROOM ID' onChange={(e)=>setRoomId(e.target.value)} value={roomId} onKeyUp={handleInputEnter} />
-                <input type="text" className="inputBox" placeholder='USERNAME' onChange={(e)=>setUserName(e.target.value)} value={userName} onKeyUp={handleInputEnter} />
+                <input type="text" className="inputBox" placeholder='USERNAME' onChange={(e)=>setUserName(e.target.value)} value={username} onKeyUp={handleInputEnter} />
                 <button className='btn joinBtn' onClick={joinRoom}>Join</button>
                 <span className='createInfo'>
                     If you don't have an invite then create &nbsp;
