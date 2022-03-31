@@ -5,7 +5,6 @@ import {initSocket} from "../socket";
 import ACTIONS from '../Actions';
 import { useLocation,useNavigate,Navigate,useParams } from 'react-router-dom';
 import toast from 'react-hot-toast';
-import cli from 'nodemon/lib/cli';
 
 
 const EditorPage = () => {
@@ -37,6 +36,14 @@ const EditorPage = () => {
             console.log(`${username} joined.`);
           }
           setClients(clients);
+        });
+
+        //Listening for disconnected
+        socketRef.current.on(ACTIONS.DISCONNECTED,({socketId,username})=>{
+          toast.success(`${username} left the room. `);
+          setClients((prev)=>{
+            return prev.filter((client)=>client.socketId!==socketId)
+          })
         })
     }
     init();
